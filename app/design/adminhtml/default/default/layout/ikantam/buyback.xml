@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_buyback_order_grid>
+        <update handle="formkey"/>
+        <block type="buyback/adminhtml_order_grid" name="buyback_order.grid" output="toHtml"></block>
+    </adminhtml_buyback_order_grid>
+
+    <adminhtml_buyback_order_index>
+        <reference name="content">
+            <block type="buyback/adminhtml_order" name="buyback_order.grid.container"></block>
+        </reference>
+    </adminhtml_buyback_order_index>
+    <adminhtml_buyback_order_view>
+        <reference name="head">
+            <action method="addJs"><file>mage/adminhtml/giftmessage.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftoptions/tooltip.js</file></action>
+        </reference>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_view" name="sales_order_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="adminhtml/sales_order_view_tabs" name="sales_order_tabs">
+                <block type="adminhtml/sales_order_view_tab_info" name="order_tab_info" template="ikantam/buyback/order/view/tab/info.phtml">
+                    <block type="adminhtml/sales_order_view_messages" name="order_messages"></block>
+                    <block type="adminhtml/sales_order_view_info" name="order_info" template="ikantam/buyback/order/view/info.phtml"></block>
+                    <block type="adminhtml/sales_order_view_items" name="order_items" template="ikantam/buyback/order/view/items.phtml">
+                        <action method="addItemRender"><type>buyback</type><block>adminhtml/sales_order_view_items_renderer_default</block><template>ikantam/buyback/order/view/items/renderer/buyback.phtml</template></action>
+                        <action method="addColumnRender"><column>qty</column><block>adminhtml/sales_items_column_qty</block><template>sales/items/column/qty.phtml</template></action>
+                        <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name</block><template>sales/items/column/name.phtml</template></action>
+                        <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name_grouped</block><template>sales/items/column/name.phtml</template><type>grouped</type></action>
+                        <block type="core/text_list" name="order_item_extra_info" />
+                    </block>
+                    <!--<block type="adminhtml/sales_order_payment" name="order_payment"/>-->
+                    <block type="buyback/adminhtml_order_view_history" name="order_history" template="sales/order/view/history.phtml"></block>
+                    <!--<block type="adminhtml/template" name="gift_optios" template="sales/order/giftoptions.phtml">-->
+                        <!--<block type="adminhtml/sales_order_view_giftmessage" name="order_giftmessage" template="sales/order/view/giftmessage.phtml"></block>-->
+                    <!--</block>-->
+                    <block type="adminhtml/sales_order_totals" name="order_totals" template="ikantam/buyback/order/totals.phtml">
+                        <!--<block type="adminhtml/sales_order_totals_tax" name="tax" template="sales/order/totals/tax.phtml" />-->
+                    </block>
+                </block>
+                <action method="addTab"><name>order_info</name><block>order_tab_info</block></action>
+            </block>
+        </reference>
+    </adminhtml_buyback_order_view>
+
+    <adminhtml_buyback_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>mage/adminhtml/sales.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftmessage.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
+            <action method="addJs"><file>varien/configurable.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftoptions/tooltip.js</file></action>
+            <block type="adminhtml/template" name="optional_zip_countries" as="optional_zip_countries" template="directory/js/optional_zip_countries.phtml" />
+        </reference>
+        <reference name="js">
+            <block type="adminhtml/template" template="ikantam/buyback/order/create/js.phtml" name="create" />
+        </reference>
+        <reference name="root">
+            <block type="buyback/adminhtml_order_create" name="content">
+                <block type="buyback/adminhtml_order_create_form" template="sales/order/create/form.phtml" name="form">
+                    <block type="buyback/adminhtml_order_create_messages" name="message" />
+                    <block type="adminhtml/sales_order_create_customer" template="sales/order/create/abstract.phtml" name="customer">
+                        <block type="adminhtml/sales_order_create_customer_grid" name="grid" />
+                    </block>
+                    <block type="buyback/adminhtml_order_create_store" template="sales/order/create/abstract.phtml" name="store">
+                        <block type="adminhtml/sales_order_create_store_select" template="sales/order/create/store/select.phtml" name="select" />
+                    </block>
+                    <block type="buyback/adminhtml_order_create_data" template="ikantam/buyback/order/create/data.phtml" name="data">
+
+                        <block type="buyback/adminhtml_order_create_search" template="sales/order/create/abstract.phtml" name="search">
+                            <block type="buyback/adminhtml_order_create_search_grid" name="grid" />
+                        </block>
+                        <block type="buyback/adminhtml_order_create_items" template="sales/order/create/items.phtml" name="items">
+                            <block type="buyback/adminhtml_order_create_items_grid" template="sales/order/create/items/grid.phtml" name="items_grid">
+                            </block>
+                        </block>
+                        <block type="buyback/adminhtml_order_create_abstract" template="ikantam/buyback/order/create/payment_info.phtml" name="payment_info" />
+                        <block type="buyback/adminhtml_order_create_comment" template="sales/order/create/comment.phtml" name="comment" />
+                        <block type="buyback/adminhtml_order_create_totals" template="sales/order/create/totals.phtml" name="totals" />
+                        <block type="core/text_list" name="order_item_extra_info"></block>
+                    </block>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_buyback_order_create_index>
+    <adminhtml_buyback_order_edit_index>
+        <update handle="adminhtml_buyback_order_create_index" />
+    </adminhtml_buyback_order_edit_index>
+
+    <adminhtml_buyback_order_create_load_block_json>
+        <reference name="root">
+            <block type="buyback/adminhtml_order_create_load" name="content" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_json>
+    <adminhtml_buyback_order_edit_load_block_json>
+        <update handle= "adminhtml_buyback_order_create_load_block_json" />
+    </adminhtml_buyback_order_edit_load_block_json>
+
+    <adminhtml_buyback_order_create_load_block_plain>
+        <reference name="root">
+            <block type="core/text_list" name="content" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_plain>
+    <adminhtml_buyback_order_edit_load_block_plain>
+        <update handle="adminhtml_buyback_order_create_load_block_plain" />
+    </adminhtml_buyback_order_edit_load_block_plain>
+
+    <adminhtml_buyback_order_create_load_block_data>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_data" template="ikantam/buyback/order/create/data.phtml" name="data">
+                <block type="buyback/adminhtml_order_create_search" template="sales/order/create/abstract.phtml" name="search">
+                    <block type="buyback/adminhtml_order_create_search_grid" name="grid" />
+                </block>
+                <block type="buyback/adminhtml_order_create_items" template="sales/order/create/items.phtml" name="items">
+                    <block type="buyback/adminhtml_order_create_items_grid" template="sales/order/create/items/grid.phtml" name="items_grid">
+                    </block>
+                </block>
+                <block type="buyback/adminhtml_order_create_abstract" template="ikantam/buyback/order/create/payment_info.phtml" name="payment_info" />
+                <block type="buyback/adminhtml_order_create_comment" template="sales/order/create/comment.phtml" name="comment" />
+                <block type="buyback/adminhtml_order_create_totals" template="sales/order/create/totals.phtml" name="totals" />
+                <block type="core/text_list" name="order_item_extra_info"></block>
+            </block>
+        </reference>
+    </adminhtml_buyback_order_create_load_block_data>
+    <adminhtml_buyback_order_edit_load_block_data>
+        <update handle="adminhtml_buyback_order_create_load_block_data" />
+    </adminhtml_buyback_order_edit_load_block_data>
+
+    <adminhtml_buyback_order_create_load_block_header>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_header" name="header" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_header>
+    <adminhtml_buyback_order_edit_load_block_header>
+        <update handle="adminhtml_buyback_order_create_load_block_header" />
+    </adminhtml_buyback_order_edit_load_block_header>
+
+    <adminhtml_buyback_order_create_load_block_search>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_search" template="sales/order/create/abstract.phtml" name="search">
+                <block type="buyback/adminhtml_order_create_search_grid" name="grid" />
+            </block>
+        </reference>
+    </adminhtml_buyback_order_create_load_block_search>
+    <adminhtml_buyback_order_edit_load_block_search>
+        <update handle="adminhtml_buyback_order_create_load_block_search" />
+    </adminhtml_buyback_order_edit_load_block_search>
+
+    <adminhtml_buyback_order_create_load_block_search_grid>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_search_grid" name="grid" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_search_grid>
+    <adminhtml_buyback_order_edit_load_block_search_grid>
+        <update handle="adminhtml_buyback_order_create_load_block_search_grid" />
+    </adminhtml_buyback_order_edit_load_block_search_grid>
+
+    <adminhtml_buyback_order_create_load_block_items>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_items" template="sales/order/create/items.phtml" name="items">
+                <block type="buyback/adminhtml_order_create_items_grid" template="sales/order/create/items/grid.phtml" name="items_grid" />
+            </block>
+            <block type="core/text_list" name="order_item_extra_info"></block>
+        </reference>
+    </adminhtml_buyback_order_create_load_block_items>
+    <adminhtml_buyback_order_edit_load_block_items>
+        <update handle="adminhtml_buyback_order_create_load_block_items" />
+    </adminhtml_buyback_order_edit_load_block_items>
+
+    <adminhtml_buyback_order_create_load_block_comment>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_comment" template="sales/order/create/comment.phtml" name="comment" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_comment>
+    <adminhtml_buyback_order_edit_load_block_comment>
+        <update handle="adminhtml_buyback_order_create_load_block_comment" />
+    </adminhtml_buyback_order_edit_load_block_comment>
+
+    <adminhtml_buyback_order_create_load_block_totals>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_totals" template="sales/order/create/totals.phtml" name="totals" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_totals>
+    <adminhtml_buyback_order_edit_load_block_totals>
+        <update handle="adminhtml_buyback_order_create_load_block_totals" />
+    </adminhtml_buyback_order_edit_load_block_totals>
+
+    <adminhtml_buyback_order_create_load_block_message>
+        <reference name="content">
+            <block type="buyback/adminhtml_order_create_messages" name="message" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_message>
+    <adminhtml_buyback_order_edit_load_block_message>
+        <update handle="adminhtml_buyback_order_create_load_block_message" />
+    </adminhtml_buyback_order_edit_load_block_message>
+
+    <adminhtml_buyback_order_create_load_block_customer_grid>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_customer_grid" name="grid" />
+        </reference>
+    </adminhtml_buyback_order_create_load_block_customer_grid>
+    <adminhtml_buyback_order_edit_load_block_customer_grid>
+        <update handle="adminhtml_buyback_order_create_load_block_customer_grid" />
+    </adminhtml_buyback_order_edit_load_block_customer_grid>
+
+
+    <adminhtml_buyback_order_addcomment>
+        <block type="buyback/adminhtml_order_view_history" name="order_history" template="sales/order/view/history.phtml" output="toHtml"/>
+    </adminhtml_buyback_order_addcomment>
+
+
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab"><name>customer_edit_tab_buyback</name><block>buyback/adminhtml_customer_edit_tab_buyback</block></action>
+        </reference>
+    </adminhtml_customer_edit>
+    <adminhtml_buyback_order_customergrid>
+        <update handle="formkey" />
+        <block type="buyback/adminhtml_customer_edit_tab_buyback_grid" name="buyback_order.grid" output="toHtml" />
+    </adminhtml_buyback_order_customergrid>
+
+</layout>

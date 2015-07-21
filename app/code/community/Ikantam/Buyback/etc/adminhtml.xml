@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+         <buyback translate="title" module="buyback">
+            <title>Buyback</title>
+            <sort_order>2000</sort_order>
+            <depends><module>Ikantam_Buyback</module></depends>
+            <children>
+                <order translate="title" module="sales">
+                    <title>Buyback Orders</title>
+                    <action>adminhtml/buyback_order</action>
+                    <sort_order>10</sort_order>
+                </order>
+            </children>
+         </buyback>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <buyback translate="title" module="buyback">
+                        <title>Buyback</title>
+                        <children>
+                            <order translate="title">
+                                <title>Buyback Orders</title>
+                                <children>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <children>
+                                            <!--<create translate="title"><title>Create</title></create>-->
+                                            <index translate="title"><title>Index</title></index>
+                                            <addComment translate="title"><title>Add Comment</title></addComment>
+                                            <commentsHistory translate="title"><title>Comments History</title></commentsHistory>
+                                            <comment translate="title"><title>Comment</title></comment>
+                                            <view translate="title"><title>View</title></view>
+                                            <email translate="title"><title>Send Buyback Order Email</title></email>
+                                            <emails translate="title"><title>Send Sales Emails</title></emails>
+                                        </children>
+                                    </actions>
+                                </children>
+                                <sort_order>10</sort_order>
+                            </order>
+
+                        </children>
+                    </buyback>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <buyback translate="title" module="buyback">
+                                        <title>Buyback</title>
+                                    </buyback>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

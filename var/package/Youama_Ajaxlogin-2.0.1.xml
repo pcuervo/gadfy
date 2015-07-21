@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+    <name>Youama_Ajaxlogin</name>
+    <version>2.0.1</version>
+    <stability>stable</stability>
+    <license uri="http://www.gnu.org/copyleft/gpl.html">GNU General Public License (GPL)</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>This module implement the Magento Login/Register process.&#xD;
+</summary>
+    <description>This module implement the Magento Login/Register process. Youama_Ajaxlogin generate two popup windows what allow login and registration. Remove the default login and registration pages by redirect to homepage. This module has setting page: System -&gt; Configuration -&gt; Youama -&gt; Ajax Login and Register&#xD;
+</description>
+    <notes>If there is jQuery problem by another module what implement jquery, please visit the settings page of this module.</notes>
+    <authors><author><name>David Belicza</name><user>DoveID</user><email>87.bdavid@gmail.com</email></author></authors>
+    <date>2014-06-10</date>
+    <time>16:53:36</time>
+    <contents><target name="magecommunity"><dir name="Youama"><dir name="Ajaxlogin"><dir name="Block"><file name="Ajaxlogin.php" hash="d07aa39857323d01391a91fd81681055"/></dir><dir name="controllers"><file name="AccountController.php" hash="9616960a7e3d6f48638d785641d9e02e"/><file name="AjaxController.php" hash="8926d8362cf4236750425763f171be9d"/></dir><dir name="etc"><file name="adminhtml.xml" hash="7940174e3008902fa8fc09ec7fab62b7"/><file name="config.xml" hash="7477e23bc5d4b9c728294a00064f7d3e"/><file name="system.xml" hash="d977db06d1e75b60b2ba3370c04870e6"/></dir><dir name="Model"><file name="Ajaxlogin.php" hash="2cb689d944eb3de6e6d73e77dbae82e4"/><file name="Ajaxregister.php" hash="5063c3e74326ce0714c541408b96a08b"/><file name="Validator.php" hash="b38580d8373ae98d93132d7daae3791c"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Youama_Ajaxlogin.xml" hash="74c3abbcbb9bea7e4cfd4346d6a68c54"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="youama_ajaxlogin.xml" hash="9bce1a7edca2e6b521201e15c1015ac8"/></dir><dir name="template"><dir name="youama"><dir name="ajaxlogin"><file name="ajaxlogin.phtml" hash="5762a3f3c4321d772bc6ef1b0d6f3883"/></dir></dir></dir></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><dir name="youama"><dir name="ajaxlogin"><file name="ajaxlogin.css" hash="6643ed2930932568afd75fb4633491b2"/></dir></dir></dir><dir name="images"><dir name="youama"><dir name="ajaxlogin"><file name="loader.gif" hash="bddaa3a544a4a5b32fe95fcc59b1bbc2"/></dir></dir></dir><dir name="js"><dir name="youama"><dir name="ajaxlogin"><file name="ajaxlogin.js" hash="9fa73f3d4500f51c12fdd640d326a6ff"/><file name="jquery-1-11-1.js" hash="4625f24f6a8cbb43df7785fa588f6461"/><file name="jquery-ui-1-10-4.js" hash="794e59f6144e3841062157279af70af9"/></dir></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="hu_HU"><file name="Youama_Ajaxlogin.csv" hash="61a304f3940f9a6986cd8224801f41a2"/></dir><dir name="en_US"><file name="Youama_Ajaxlogin.csv" hash="61a304f3940f9a6986cd8224801f41a2"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>5.5.12</max></php></required></dependencies>
+</package>

@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Ikantam_Buyback>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Ikantam_Buyback>
+    </modules>
+</config>

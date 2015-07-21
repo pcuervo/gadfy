@@ -1,0 +1,4 @@
+<!--<h4 class="icon-head fieldset-legend <?php echo $this->getHeaderCssClass() ?>"><?php echo $this->getHeaderText() ?></h4>-->
+<label for="order-comment"><?php echo Mage::helper('sales')->__('Payment Info') ?></label><br />
+<textarea style="width:98%; height:8em;" id="order-comment" name="order[payment_info]" rows="2" cols="15"><?php echo $this->getQuote()->getPaymentInfo() ?></textarea>
+<script type="text/javascript">order.commentFieldsBind('order-comment')</script>

@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<layout>
+
+    <catalog_product_view>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate"><template>ikantam/buyback/catalog/product/view/addtocart.phtml</template></action>
+        </reference>
+
+    </catalog_product_view>
+
+    <default>
+
+    <!-- Mage_Checkout -->
+        <reference name="top.links">
+            <block type="buyback/links" name="buyback_cart_link">
+                <action  method="addCartLink"></action>
+            </block>
+        </reference>
+
+    </default>
+    <customer_account>
+        <!-- Mage_Sales -->
+        <reference name="customer_account_navigation">
+            <action  method="addLink" translate="label" module="buyback"><name>buyback_orders</name><path>buyback/order/history/</path><label>My Buyback Orders</label></action>
+        </reference>
+    </customer_account>
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="addItemRender"><type>default</type><block>sales/order_email_items_order_default</block><template>email/order/items/order/default.phtml</template></action>
+            <action method="addItemRender"><type>buyback</type><block>sales/order_email_items_order_default</block><template>ikantam/buyback/order/view/items/renderer/default.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>sales/order_email_items_order_grouped</block><template>email/order/items/order/default.phtml</template></action>
+            <block type="sales/order_totals" name="order_totals" template="ikantam/buyback/sales/order/totals.phtml">
+                <action method="setLabelProperties"><value>colspan="3" align="right" style="padding:3px 9px"</value></action>
+                <action method="setValueProperties"><value>align="right" style="padding:3px 9px"</value></action>
+                <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml">
+                    <action method="setIsPlaneMode"><value>1</value></action>
+                </block>
+            </block>
+        </reference>
+    </sales_email_order_items>
+    <buyback_cart_index translate="label">
+        <label>Shopping Cart</label>
+        <remove name="right" />
+        <remove name="left" />
+        <!-- Mage_Checkout -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="buyback/cart" name="checkout.cart">
+                <action method="setCartTemplate"><value>ikantam/buyback/cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>ikantam/buyback/cart/noItems.phtml</value></action>
+                <action method="chooseTemplate" />
+                <!--<action method="addItemRender"><type>simple</type><block>buyback/cart_item_renderer</block><template>ikantam/buyback/cart/item/default.phtml</template></action>-->
+                <!--<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/item/default.phtml</template></action>-->
+                <!--<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/item/default.phtml</template></action>-->
+
+                <!--<block type="core/text_list" name="checkout.cart.top_methods" as="top_methods" translate="label">-->
+                    <!--<label>Payment Methods Before Checkout Button</label>-->
+                    <!--<block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="checkout/onepage/link.phtml" />-->
+                <!--</block>/-->
+
+                <!--<block type="page/html_wrapper" name="checkout.cart.form.before" as="form_before" translate="label">-->
+                    <!--<label>Shopping Cart Form Before</label>-->
+                <!--</block>-->
+
+                <block type="core/text_list" name="checkout.cart.methods" as="methods" translate="label">
+                    <!--<label>Payment Methods After Checkout Button</label>-->
+                    <block type="buyback/onepage_link" name="checkout.cart.methods.onepage" template="ikantam/buyback/onepage/link.phtml" />
+                    <!--<block type="checkout/multishipping_link" name="checkout.cart.methods.multishipping" template="checkout/multishipping/link.phtml" />-->
+                </block>
+
+                <!--<block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="checkout/cart/coupon.phtml" />-->
+                <!--<block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="checkout/cart/shipping.phtml" />-->
+                <!--<block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="checkout/cart/crosssell.phtml" />-->
+
+                <block type="buyback/cart_totals" name="checkout.cart.totals" as="totals" template="ikantam/buyback/cart/totals.phtml" />
+            </block>
+        </reference>
+        <block type="core/text_list" name="additional.product.info" translate="label">
+            <label>Additional Product Info</label>
+        </block>
+    </buyback_cart_index>
+
+    <catalog_product_view>
+		<reference name="product.info">
+			<block type="core/template" name="return_url" as="return_url" template="ikantam/buyback/catalog/product/view/return_url.phtml">
+		   		<action method="addToParentGroup"><group>detailed_info</group></action>
+		    </block>
+        </reference>
+    </catalog_product_view>
+
+     <buyback_cart_configure translate="label">
+        <label>Configure Cart Item</label>
+        <update handle="catalog_product_view"/>
+        <reference name="product.info">
+            <block type="buyback/cart_item_configure" name="checkout.cart.item.configure.block"></block>
+        </reference>
+    </buyback_cart_configure>
+    <buyback_onepage_index translate="label">
+        <label>One Page Checkout</label>
+
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <!--<reference name="right">-->
+            <!--<action method="unsetChildren"></action>-->
+            <!--<block type="page/html_wrapper" name="checkout.progress.wrapper" translate="label">-->
+                <!--<label>Checkout Progress Wrapper</label>-->
+                <!--<action method="setElementId"><value>checkout-progress-wrapper</value></action>-->
+                <!--<block type="checkout/onepage_progress" name="checkout.progress" before="-" template="checkout/onepage/progress.phtml"/>-->
+            <!--</block>-->
+        <!--</reference>-->
+        <reference name="content">
+            <block type="buyback/onepage" name="checkout.onepage" template="ikantam/buyback/onepage.phtml">
+                <block type="buyback/onepage_login" name="checkout.onepage.login" as="login" template="ikantam/buyback/onepage/login.phtml">
+                    <block type="page/html_wrapper" name="checkout.onepage.login.before" as="login_before" translate="label">
+                        <label>Login/Registration Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                    </block>
+                </block>
+                <block type="buyback/onepage_billing" name="checkout.onepage.billing" as="billing" template="ikantam/buyback/onepage/payment_info.phtml" />
+                <!--<block type="checkout/onepage_shipping" name="checkout.onepage.shipping" as="shipping" template="checkout/onepage/shipping.phtml"/>-->
+                <!--<block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method" template="checkout/onepage/shipping_method.phtml">-->
+                <!--<block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="checkout/onepage/shipping_method/available.phtml"/>-->
+                <!--<block type="checkout/onepage_shipping_method_additional" name="checkout.onepage.shipping_method.additional" as="additional" template="checkout/onepage/shipping_method/additional.phtml"/>-->
+                <!--</block>-->
+                <!--<block type="checkout/onepage_payment" name="checkout.onepage.payment" as="payment" template="ikantam/buyback/onepage/payment.phtml">-->
+                <!--<block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="checkout/onepage/payment/methods.phtml">-->
+                <!--<action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>-->
+                <!--</block>-->
+                <!--</block>-->
+                <block type="buyback/onepage_review" name="checkout.onepage.review" as="review" template="checkout/onepage/review.phtml" />
+            </block>
+        </reference>
+    </buyback_onepage_index>
+
+
+
+    <buyback_onepage_progress>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/onepage_progress" name="root" output="toHtml" template="checkout/onepage/progress.phtml">
+            <block type="checkout/onepage_payment_info" name="payment_info">
+                <action method="setInfoTemplate"><method></method><template></template></action>
+            </block>
+        </block>
+    </buyback_onepage_progress>
+
+    <!--
+    One page checkout payment methods block
+    -->
+    <buyback_onepage_paymentmethod>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/onepage_payment_methods" name="root" output="toHtml" template="checkout/onepage/payment/methods.phtml">
+            <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+        </block>
+    </buyback_onepage_paymentmethod>
+
+
+    <!--
+    One page checkout shipping methods block
+    -->
+
+    <buyback_onepage_shippingmethod>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/onepage_shipping_method_available" name="root" output="toHtml" template="checkout/onepage/shipping_method/available.phtml"/>
+    </buyback_onepage_shippingmethod>
+
+    <buyback_onepage_additional>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="buyback/onepage_shipping_method_additional" name="root" output="toHtml" template="checkout/onepage/shipping_method/additional.phtml">
+            <action method="setDontDisplayContainer"><param>1</param></action>
+        </block>
+    </buyback_onepage_additional>
+
+    <!--
+    One page checkout order review block
+    -->
+
+    <buyback_onepage_review translate="label">
+        <label>One Page Checkout Overview</label>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="buyback/onepage_review_info" name="root" output="toHtml" template="ikantam/buyback/onepage/review/info.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>ikantam/buyback/onepage/review/item.phtml</template></action>
+            <!--<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>ikantam/buyback/onepage/review/item.phtml</template></action>-->
+            <!--<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>ikantam/buyback/onepage/review/item.phtml</template></action>-->
+            <block type="buyback/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="ikantam/buyback/onepage/review/totals.phtml" />
+            <!--<block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">-->
+                <!--<label>Items Before</label>-->
+            <!--</block>-->
+            <!--<block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">-->
+                <!--<label>Items After</label>-->
+            <!--</block>-->
+
+            <block type="buyback/onepage_review_info_shipping" name="buyback.onepage.shipping_info" as="shipping_info" template="ikantam/buyback/onepage/review/shipping_info.phtml" />
+
+            <!--<block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="ikantam/buyback/onepage/agreements.phtml"/>-->
+            <block type="core/template" name="checkout.onepage.review.button" as="button" template="ikantam/buyback/onepage/review/button.phtml" />
+        </block>
+    </buyback_onepage_review>
+
+    <buyback_onepage_success translate="label">
+        <label>One Page Checkout Success</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="buyback/onepage_success" name="checkout.success" template="ikantam/buyback/success.phtml"/>
+        </reference>
+    </buyback_onepage_success>
+    <buyback_onepage_failure translate="label">
+        <label>One Page Checkout Failure</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="checkout/onepage_failure" name="checkout.failure" template="ikantam/buyback/onepage/failure.phtml"/>
+        </reference>
+    </buyback_onepage_failure>
+
+
+
+
+
+    <buyback_order_history translate="label">
+        <label>Customer My Account Buyback Order History</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="buyback/order_history" name="buyback.order.history">
+                <block type="core/text_list" name="buyback.order.history.info" as="info" translate="label">
+                    <label>Buyback Order History Info</label>
+                </block>
+            </block>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </buyback_order_history>
+
+
+    <buyback_order_view translate="label">
+        <label>Customer My Account Buyback Order View</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="buyback/order_info" as="info" name="sales.order.info" template="ikantam/buyback/order/info.phtml">
+                <block type="sales/order_info_buttons" as="buttons" name="sales.order.info.buttons" />
+            </block>
+            <block type="buyback/order_view" name="sales.order.view">
+                <block type="sales/order_items" name="order_items" template="sales/order/items.phtml">
+                    <action method="addItemRender"><type>default</type><block>sales/order_item_renderer_default</block><template>sales/order/items/renderer/default.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>sales/order_item_renderer_grouped</block><template>sales/order/items/renderer/default.phtml</template></action>
+                    <block type="sales/order_totals" name="order_totals" template="ikantam/buyback/order/totals.phtml">
+                        <!--<action method="setLabelProperties"><value>colspan="4" class="a-right"</value></action>-->
+                        <!--<action method="setValueProperties"><value>class="last a-right"</value></action>-->
+                        <!--<block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml" />-->
+                    </block>
+                </block>
+            </block>
+        </reference>
+        <!--<reference name="sales.order.info">-->
+            <!--<action method="addLink" translate="label" module="sales"><name>view</name><path></path><label>Order Information</label></action>-->
+            <!--<action method="addLink" translate="label" module="sales"><name>invoice</name><path>*/*/invoice</path><label>Invoices</label></action>-->
+            <!--<action method="addLink" translate="label" module="sales"><name>shipment</name><path>*/*/shipment</path><label>Shipments</label></action>-->
+            <!--<action method="addLink" translate="label" module="sales"><name>creditmemo</name><path>*/*/creditmemo</path><label>Refunds</label></action>-->
+        <!--</reference>-->
+        <block type="core/text_list" name="additional.product.info" translate="label">
+            <label>Additional Product Info</label>
+        </block>
+    </buyback_order_view>
+
+
+    <!--
+    Additional block dependant on product type
+    -->
+    <PRODUCT_TYPE_buyback translate="label" module="buyback">
+        <label>Catalog Product View (Buyback)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_buyback>
+</layout>

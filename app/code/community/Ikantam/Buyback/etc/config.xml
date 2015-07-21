@@ -1,0 +1,490 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ikantam_Buyback>
+            <version>1.0.1.1</version>
+        </Ikantam_Buyback>
+    </modules>
+
+    <global>
+        <blocks>
+            <buyback>
+                <class>Ikantam_Buyback_Block</class>
+            </buyback>
+        </blocks>
+        <helpers>
+            <buyback>
+                <class>Ikantam_Buyback_Helper</class>
+            </buyback>
+            <checkout>
+                <rewrite>
+                    <cart>Ikantam_Buyback_Helper_Checkout_Cart</cart>
+                </rewrite>
+            </checkout>
+        </helpers>
+        <models>
+            <buyback>
+                <class>Ikantam_Buyback_Model</class>
+                <resourceModel>buyback_resource</resourceModel>
+            </buyback>
+            <buyback_resource>
+                <class>Ikantam_Buyback_Model_Resource</class>
+                <deprecatedNode>buyback_mysql4</deprecatedNode>
+                <entities>
+                    <quote>
+                        <table>ikantam_buyback_quote</table>
+                    </quote>
+                    <quote_item>
+                        <table>ikantam_buyback_quote_item</table>
+                    </quote_item>
+                    <quote_item_option>
+                        <table>ikantam_buyback_quote_item_option</table>
+                    </quote_item_option>
+                    <quote_address>
+                        <table>ikantam_buyback_quote_address</table>
+                    </quote_address>
+                    <order>
+                        <table>ikantam_buyback_order</table>
+                    </order>
+                    <order_grid>
+                        <table>ikantam_buyback_order_grid</table>
+                    </order_grid>
+                    <order_item>
+                        <table>ikantam_buyback_order_item</table>
+                    </order_item>
+                    <order_address>
+                        <table>ikantam_buyback_order_address</table>
+                    </order_address>
+                    <order_status_history>
+                        <table>ikantam_buyback_order_status_history</table>
+                    </order_status_history>
+                </entities>
+            </buyback_resource>
+        </models>
+        <resources>
+            <buyback_setup>
+                <setup>
+                    <module>Ikantam_Buyback</module>
+                    <class>Ikantam_Buyback_Model_Resource_Setup</class>
+                </setup>
+            </buyback_setup>
+        </resources>
+
+        <catalog>
+            <product>
+                <type>
+                    <buyback translate="label" module="buyback">
+                        <label>Buyback Product</label>
+                        <model>buyback/catalog_product_type_buyback</model>
+                        <composite>0</composite>
+                        <index_priority>50</index_priority>
+
+                        <is_qty>1</is_qty>
+                    </buyback>
+                </type>
+            </product>
+        </catalog>
+        <!--<rewrite>-->
+        <!--<ikantam_buyback_checkout_cart>-->
+        <!--<from><![CDATA[#^/checkout/cart/#]]></from>-->
+        <!--<to>/buyback/checkout_cart/</to>-->
+        <!--</ikantam_buyback_checkout_cart>-->
+        <!--</rewrite>-->
+        <buyback>
+            <quote>
+                <totals>
+                    <nominal>
+                        <class>buyback/quote_address_total_nominal</class>
+                        <before>subtotal</before>
+                    </nominal>
+                    <subtotal>
+                        <class>buyback/quote_address_total_subtotal</class>
+                        <after>nominal</after>
+                        <before>grand_total</before>
+                    </subtotal>
+                    <shipping>
+                        <class>buyback/quote_address_total_shipping</class>
+                        <after>subtotal,freeshipping,tax_subtotal</after>
+                        <before>grand_total</before>
+                    </shipping>
+                    <grand_total>
+                        <class>buyback/quote_address_total_grand</class>
+                        <after>subtotal</after>
+                    </grand_total>
+                    <!--<msrp>-->
+                    <!--<class>buyback/quote_address_total_msrp</class>-->
+                    <!--</msrp>-->
+                </totals>
+                <nominal_totals>
+                    <!--<recurring_initial_fee>-->
+                    <!--<class>buyback/quote_address_total_nominal_recurring_initial</class>-->
+                    <!--<sort_order>10</sort_order>-->
+                    <!--</recurring_initial_fee>-->
+                    <!--<recurring_trial_payment>-->
+                    <!--<class>buyback/quote_address_total_nominal_recurring_trial</class>-->
+                    <!--<sort_order>50</sort_order>-->
+                    <!--</recurring_trial_payment>-->
+                    <!--<nominal_subtotal>-->
+                    <!--<class>buyback/quote_address_total_nominal_subtotal</class>-->
+                    <!--<sort_order>250</sort_order>-->
+                    <!--</nominal_subtotal>-->
+                    <!--<nominal_shipping>-->
+                    <!--<class>buyback/quote_address_total_nominal_shipping</class>-->
+                    <!--<sort_order>1250</sort_order>-->
+                    <!--</nominal_shipping>-->
+                </nominal_totals>
+                <item>
+                    <product_attributes>
+                        <sku />
+                        <type_id />
+                        <name />
+                        <status />
+                        <visibility />
+                        <price />
+                        <weight />
+                        <url_path />
+                        <url_key />
+                        <thumbnail />
+                        <small_image />
+                        <tax_class_id />
+                        <cost />
+                        <is_recurring />
+                        <recurring_profile />
+                    </product_attributes>
+                </item>
+            </quote>
+         </buyback>
+        <fieldsets>
+            <buyback_convert_quote>
+                <remote_ip>
+                    <to_order>*</to_order>
+                </remote_ip>
+                <x_forwarded_for>
+                    <to_order>*</to_order>
+                </x_forwarded_for>
+                <customer_id>
+                    <to_order>*</to_order>
+                </customer_id>
+                <customer_email>
+                    <to_order>*</to_order>
+                </customer_email>
+                <customer_prefix>
+                    <to_order>*</to_order>
+                </customer_prefix>
+                <customer_firstname>
+                    <to_order>*</to_order>
+                </customer_firstname>
+                <customer_middlename>
+                    <to_order>*</to_order>
+                </customer_middlename>
+                <customer_lastname>
+                    <to_order>*</to_order>
+                </customer_lastname>
+                <customer_suffix>
+                    <to_order>*</to_order>
+                </customer_suffix>
+                <customer_group_id>
+                    <to_order>*</to_order>
+                </customer_group_id>
+                <customer_tax_class_id>
+                    <to_order>*</to_order>
+                </customer_tax_class_id>
+                <customer_note>
+                    <to_order>*</to_order>
+                </customer_note>
+                <customer_note_notify>
+                    <to_order>*</to_order>
+                </customer_note_notify>
+                <customer_is_guest>
+                    <to_order>*</to_order>
+                </customer_is_guest>
+                <customer_dob>
+                    <to_order>*</to_order>
+                </customer_dob>
+                <customer_taxvat>
+                    <to_order>*</to_order>
+                </customer_taxvat>
+                <customer_gender>
+                    <to_order>*</to_order>
+                </customer_gender>
+
+                <base_subtotal>
+                    <to_order>*</to_order>
+                </base_subtotal>
+
+                <subtotal>
+                    <to_order>*</to_order>
+                </subtotal>
+                <grand_total>
+                    <to_order>grand_total</to_order>
+                </grand_total>
+                <payment_info>
+                    <to_order>*</to_order>
+                </payment_info>
+                <!--<global_currency_code>-->
+                    <!--<to_order>*</to_order>-->
+                <!--</global_currency_code>-->
+                <!--<base_currency_code>-->
+                    <!--<to_order>*</to_order>-->
+                <!--</base_currency_code>-->
+                <store_currency_code>
+                    <to_order>*</to_order>
+                </store_currency_code>
+                <!--<quote_currency_code>-->
+                <!--<to_order>order_currency_code</to_order>-->
+                <!--</quote_currency_code>-->
+                <!--<store_to_base_rate>-->
+                <!--<to_order>*</to_order>-->
+                <!--</store_to_base_rate>-->
+                <!--<store_to_quote_rate>-->
+                <!--<to_order>store_to_order_rate</to_order>-->
+                <!--</store_to_quote_rate>-->
+                <!--<base_to_global_rate>-->
+                <!--<to_order>*</to_order>-->
+                <!--</base_to_global_rate>-->
+                <!--<base_to_quote_rate>-->
+                <!--<to_order>base_to_order_rate</to_order>-->
+                <!--</base_to_quote_rate>-->
+                <!--<coupon_code>-->
+                <!--<to_order>*</to_order>-->
+                <!--</coupon_code>-->
+                <is_virtual>
+                    <to_order>*</to_order>
+                </is_virtual>
+                <!--<is_multi_payment>-->
+                <!--<to_order>*</to_order>-->
+                <!--</is_multi_payment>-->
+                <!--<applied_rule_ids>-->
+                    <!--<to_order>*</to_order>-->
+                <!--</applied_rule_ids>-->
+                <items_qty>
+                    <to_order>total_qty_ordered</to_order>
+                </items_qty>
+            </buyback_convert_quote>
+         </fieldsets>
+        <sales>
+            <order>
+                <!-- /**
+                      * @depraceted after 1.4.2, statuses are saved into sales_order_status table
+                      */
+                -->
+                <statuses>
+
+                </statuses>
+                <states>
+                    <buyback translate="label">
+                        <label>Buyback</label>
+                        <statuses>
+                            <pending default="1" />
+                        </statuses>
+                        <visible_on_front>1</visible_on_front>
+                    </buyback>
+
+                </states>
+            </order>
+        </sales>
+        <template>
+            <email>
+                <buyback_order_template translate="label" module="buyback">
+                    <label>Buyback New Order</label>
+                    <file>buyback/order_new.html</file>
+                    <type>html</type>
+                </buyback_order_template>
+                <buyback_order_comment_template translate="label" module="buyback">
+                    <label>Buyback Order Update</label>
+                    <file>buyback/order_update.html</file>
+                    <type>html</type>
+                </buyback_order_comment_template>
+            </email>
+        </template>
+        <importexport>
+            <import_product_types>
+                <buyback>importexport/import_entity_product_type_simple</buyback>
+            </import_product_types>
+            <export_product_types>
+                <buyback>importexport/export_entity_product_type_simple</buyback>
+            </export_product_types>
+        </importexport>
+    </global>
+
+
+     <admin>
+         <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <buyback before="Mage_Adminhtml">Ikantam_Buyback_Adminhtml</buyback>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+        <fieldsets>
+            <catalog_product_dataflow>
+                <qty>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </qty>
+                <min_qty>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </min_qty>
+                <is_qty_decimal>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </is_qty_decimal>
+                <is_decimal_divided>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </is_decimal_divided>
+                <backorders>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </backorders>
+                <min_sale_qty>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </min_sale_qty>
+                <max_sale_qty>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </max_sale_qty>
+                <is_in_stock>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </is_in_stock>
+                <notify_stock_qty>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </notify_stock_qty>
+                <manage_stock>
+                    <product_type>
+                        <buyback />
+                    </product_type>
+                </manage_stock>
+            </catalog_product_dataflow>
+        </fieldsets>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <buyback>
+                    <file>ikantam/buyback.xml</file>
+                </buyback>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Ikantam_Buyback>
+                    <files>
+                        <default>Ikantam_Buyback.csv</default>
+                    </files>
+                </Ikantam_Buyback>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <frontend>
+         <events>
+            <customer_login>
+                <observers>
+                    <loadCustomerBuybackQuote>
+                        <class>buyback/observer</class>
+                        <method>loadCustomerQuote</method>
+                    </loadCustomerBuybackQuote>
+                </observers>
+            </customer_login>
+            <customer_logout>
+                <observers>
+                    <buybackUnsetAll>
+                        <class>buyback/observer</class>
+                        <method>unsetAll</method>
+                    </buybackUnsetAll>
+                </observers>
+            </customer_logout>
+            <sales_quote_save_after>
+                <observers>
+                    <set_checkout_buyback_quote_id>
+                        <class>buyback/observer</class>
+                        <method>salesQuoteSaveAfter</method>
+                    </set_checkout_buyback_quote_id>
+                </observers>
+            </sales_quote_save_after>
+            <buyback_submit_all_after>
+                <observers>
+                    <inventory>
+                        <class>cataloginventory/observer</class>
+                        <method>checkoutAllSubmitAfter</method>
+                    </inventory>
+                </observers>
+            </buyback_submit_all_after>
+        </events>
+        <routers>
+            <buyback>
+                <use>standard</use>
+                <args>
+                    <module>Ikantam_Buyback</module>
+                    <frontName>buyback</frontName>
+                </args>
+            </buyback>
+        </routers>
+        <layout>
+            <updates>
+                <buyback>
+                    <file>ikantam/buyback.xml</file>
+                </buyback>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Ikantam_Buyback>
+                    <files>
+                        <default>Ikantam_Buyback.csv</default>
+                    </files>
+                </Ikantam_Buyback>
+            </modules>
+        </translate>
+    </frontend>
+
+
+    <default>
+        <buyback>
+            <buyback>
+                <shipping_info>-Store Address-</shipping_info>
+                <payment_info_title>Write how you'd like to get paid</payment_info_title>
+            </buyback>
+            <order>
+                <enabled>1</enabled>
+                <template>buyback_order_template</template>
+                <identity>sales</identity>
+                <copy_method>bcc</copy_method>
+            </order>
+            <order_comment>
+                <enabled>1</enabled>
+                <template>buyback_order_comment_template</template>
+                <identity>sales</identity>
+                <copy_method>bcc</copy_method>
+            </order_comment>
+        </buyback>
+    </default>
+
+    <stores>
+        <admin>
+            <dev>
+                <debug>
+                    <!--<template_hints>1</template_hints>-->
+                    <!--<template_hints_blocks>1</template_hints_blocks>-->
+                </debug>
+            </dev>
+        </admin>
+    </stores>
+
+</config>

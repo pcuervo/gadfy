@@ -1,0 +1,26 @@
+16_7_15
+------------------------------------------
+
+1. Download spanish language
+http://www.magentocommerce.com/magento-connect/community-modules-spanish-spain-language-pack.html
+extension key ----> http://connect20.magentocommerce.com/community/Locale_Mage_community_es_ES
+
+
+extension ajax login ->  http://www.magentocommerce.com/magento-connect/youama-ajax-login-and-register.html
+
+ext-key --> http://connect20.magentocommerce.com/community/Youama_Ajaxlogin
+
+
+20_7_15
+=========================================================
+/home/admin/.gvfs/SFTP for admin on 192.168.0.55/opt/lampp/htdocs/gadfy/app/design/frontend/rwd/gadfy/template/youama/ajaxlogin/ajaxlogin.phtml
+
+text:
+Enter your account GADFY
+
+sftp://admin@192.168.0.55/opt/lampp/htdocs/gadfy/app/code/community/Youama/Ajaxlogin/Model/Validator.php
+
+sftp://admin@192.168.0.55/opt/lampp/htdocs/gadfy/skin/frontend/rwd/gadfy/js/youama/ajaxlogin/ajaxlogin.js
+
+sftp://admin@192.168.0.55/opt/lampp/htdocs/gadfy/app/design/frontend/rwd/gadfy/template/youama/ajaxlogin/ajaxlogin.phtml
+
